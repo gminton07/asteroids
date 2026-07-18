@@ -6,8 +6,12 @@ dist/
 wheels/
 *.egg-info
 
+# Vim tmp files
+*.swp
+
 # Virtual environments
 .venv
 
 # Logs
 game_state.jsonl
+game_events.jsonl
