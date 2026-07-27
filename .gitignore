@@ -12,6 +12,9 @@ wheels/
 # Virtual environments
 .venv
 
+# VS Code files
+.vscode/
+
 # Logs
 game_state.jsonl
 game_events.jsonl
