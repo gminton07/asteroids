@@ -3,7 +3,7 @@ import sys
 
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_SCORE_DESTROY
 from logger import log_state, log_event
 from player import Player
 from shot import Shot
@@ -31,6 +31,7 @@ def main():
     
     # Create player object
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    player_score: int = 0
 
     # Create asteroid field object
     asteroidfield = AsteroidField()
@@ -53,13 +54,17 @@ def main():
         for asteroid in asteroids:
             if asteroid.collides_with(player):
                 log_event("player_hit")
-                print('Game over!')
+                print('Game over!\n')
+                print('Results:')
+                print(f'Time survived: {pygame.time.get_ticks()/1000} sec')
+                print(f'Final score: {player_score}')
                 sys.exit()
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
                     asteroid.split()
                     shot.kill()
+                    player_score += PLAYER_SCORE_DESTROY
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000
